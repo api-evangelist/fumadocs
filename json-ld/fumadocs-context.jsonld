@@ -1,0 +1,120 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fumadocs": "https://fumadocs.dev/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "DocumentationSite": {
+      "@id": "fumadocs:DocumentationSite",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "baseUrl": {
+          "@id": "fumadocs:baseUrl",
+          "@type": "@id"
+        },
+        "pageTree": {
+          "@id": "fumadocs:pageTree",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "PageTree": {
+      "@id": "fumadocs:PageTree",
+      "@context": {
+        "name": "schema:name",
+        "children": {
+          "@id": "schema:hasPart",
+          "@container": "@set"
+        },
+        "fallback": {
+          "@id": "fumadocs:fallback",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Page": {
+      "@id": "fumadocs:Page",
+      "@context": {
+        "title": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "icon": "schema:image",
+        "type": "schema:additionalType",
+        "external": "fumadocs:external"
+      }
+    },
+
+    "Folder": {
+      "@id": "fumadocs:Folder",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "icon": "schema:image",
+        "root": "fumadocs:root",
+        "defaultOpen": "fumadocs:defaultOpen",
+        "collapsible": "fumadocs:collapsible",
+        "children": {
+          "@id": "schema:hasPart",
+          "@container": "@set"
+        },
+        "index": {
+          "@id": "fumadocs:indexPage",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Separator": {
+      "@id": "fumadocs:Separator",
+      "@context": {
+        "name": "schema:name",
+        "icon": "schema:image"
+      }
+    },
+
+    "SearchResult": {
+      "@id": "fumadocs:SearchResult",
+      "@context": {
+        "id": "schema:identifier",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "type": "schema:additionalType",
+        "content": "schema:text",
+        "breadcrumbs": {
+          "@id": "fumadocs:breadcrumbs",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Meta": {
+      "@id": "fumadocs:Meta",
+      "@context": {
+        "title": "schema:name",
+        "description": "schema:description",
+        "pages": {
+          "@id": "schema:hasPart",
+          "@container": "@list"
+        },
+        "root": "fumadocs:root",
+        "defaultOpen": "fumadocs:defaultOpen",
+        "collapsible": "fumadocs:collapsible",
+        "icon": "schema:image"
+      }
+    }
+  }
+}

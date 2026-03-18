@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fumadocs.dev/schemas/search-result.json",
+  "title": "Fumadocs Search Result",
+  "description": "The schema for a single search result returned by the Fumadocs search API endpoint. Each result represents a matched documentation segment at page, heading, or text granularity. Results include the page URL, matched content with optional highlight markers, and breadcrumbs for navigation context.",
+  "type": "object",
+  "required": ["id", "url", "type", "content"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this search result within the index. Used by the client for result deduplication and React key assignment.",
+      "example": "docs/getting-started#installation"
+    },
+    "url": {
+      "type": "string",
+      "description": "Relative URL path of the documentation page containing this result. May include a fragment identifier pointing to a specific heading anchor.",
+      "example": "/docs/getting-started#installation"
+    },
+    "type": {
+      "type": "string",
+      "description": "Granularity level of the matched content. 'page' indicates the page title matched; 'heading' indicates a section heading matched; 'text' indicates body paragraph text matched.",
+      "enum": ["page", "heading", "text"]
+    },
+    "content": {
+      "type": "string",
+      "description": "The matched text content. May contain inline Markdown highlight annotations using <mark> tags wrapping the matched query terms to enable client-side highlight rendering.",
+      "example": "Install Fumadocs using your preferred package manager"
+    },
+    "breadcrumbs": {
+      "type": "array",
+      "description": "Ordered list of ancestor section and page titles forming the breadcrumb trail to this result. Displayed in the search results UI to give users navigation context for where the result lives within the documentation.",
+      "items": {
+        "type": "string",
+        "description": "A breadcrumb label for an ancestor page or section."
+      },
+      "example": ["Documentation", "Getting Started"]
+    }
+  }
+}

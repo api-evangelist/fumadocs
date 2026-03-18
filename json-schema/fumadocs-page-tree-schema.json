@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fumadocs.dev/schemas/page-tree.json",
+  "title": "Fumadocs Page Tree",
+  "description": "The hierarchical navigation tree structure used by Fumadocs to represent documentation site structure. A page tree is composed of a root node containing an ordered list of child nodes that are pages, folders, or visual separators. The page tree is built at compile time from the file system layout and meta.json files, then serialized and served to the browser for rendering the sidebar navigation.",
+  "type": "object",
+  "$ref": "#/$defs/Root",
+  "$defs": {
+    "Root": {
+      "type": "object",
+      "title": "Root",
+      "description": "The root node of a Fumadocs page tree. Represents the top-level navigation structure for a documentation site or locale. May have a fallback tree used as a default when the requested locale tree is unavailable.",
+      "required": ["children"],
+      "properties": {
+        "$id": {
+          "type": "string",
+          "description": "Optional unique identifier for the root node. Must be unique across all page trees including different locales."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the documentation site or section represented by this tree."
+        },
+        "children": {
+          "type": "array",
+          "description": "Ordered list of top-level navigation nodes. Each child is a page link, a collapsible folder, or a visual separator.",
+          "items": {
+            "$ref": "#/$defs/Node"
+          }
+        },
+        "fallback": {
+          "$ref": "#/$defs/Root",
+          "description": "An alternate page tree used as a fallback when the primary tree cannot be displayed. Typically used for locale fallback."
+        }
+      }
+    },
+    "Node": {
+      "title": "Node",
+      "description": "A single navigation node in the page tree. Can be a page link (Item), a collapsible folder of pages (Folder), or a visual separator (Separator).",
+      "oneOf": [
+        { "$ref": "#/$defs/Item" },
+        { "$ref": "#/$defs/Folder" },
+        { "$ref": "#/$defs/Separator" }
+      ]
+    },
+    "Item": {
+      "type": "object",
+      "title": "Item",
+      "description": "A leaf navigation node representing a single documentation page link. Items are rendered as clickable links in the sidebar navigation.",
+      "required": ["type", "name", "url"],
+      "properties": {
+        "$id": {
+          "type": "string",
+          "description": "Optional unique identifier for this node. Must be unique across all page trees."
+        },
+        "$ref": {
+          "type": "object",
+          "description": "Internal reference metadata linking this item to its source file. Used by the Fumadocs build system.",
+          "properties": {
+            "file": {
+              "type": "string",
+              "description": "Relative path to the source MDX or Markdown file for this page."
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "const": "page",
+          "description": "Discriminator field identifying this node as a page link item."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for this page as shown in the sidebar navigation."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL path of the documentation page. May be a relative path within the site or an absolute external URL.",
+          "example": "/docs/getting-started"
+        },
+        "external": {
+          "type": "boolean",
+          "description": "When true, the link is treated as external and rendered using an HTML anchor tag rather than the framework's client-side navigation component. Defaults to automatic detection based on the url value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional short description of the page shown as supplementary text in the navigation."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon identifier or SVG content to display alongside the page title in navigation."
+        }
+      }
+    },
+    "Folder": {
+      "type": "object",
+      "title": "Folder",
+      "description": "A navigation node representing a collapsible section containing child pages and nested folders. Folders map to directories in the documentation file system.",
+      "required": ["type", "name", "children"],
+      "properties": {
+        "$id": {
+          "type": "string",
+          "description": "Optional unique identifier for this node."
+        },
+        "$ref": {
+          "type": "object",
+          "description": "Internal reference metadata linking this folder to its meta.json source file.",
+          "properties": {
+            "metaFile": {
+              "type": "string",
+              "description": "Path to the meta.json file that configures this folder's display properties."
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "const": "folder",
+          "description": "Discriminator field identifying this node as a folder."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for this folder as shown in the sidebar navigation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of this section shown as supplementary text."
+        },
+        "root": {
+          "type": "boolean",
+          "description": "When true, this folder acts as a secondary navigation root. Pages within this folder are shown in isolation when any child page is active."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "description": "When true, this folder is expanded by default in the sidebar even when no child page is active."
+        },
+        "collapsible": {
+          "type": "boolean",
+          "description": "When false, this folder cannot be collapsed and its children are always visible."
+        },
+        "index": {
+          "$ref": "#/$defs/Item",
+          "description": "Optional index page for this folder shown when the folder itself is navigated to."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon identifier or SVG content to display alongside the folder title."
+        },
+        "children": {
+          "type": "array",
+          "description": "Ordered list of child navigation nodes within this folder.",
+          "items": {
+            "$ref": "#/$defs/Node"
+          }
+        }
+      }
+    },
+    "Separator": {
+      "type": "object",
+      "title": "Separator",
+      "description": "A visual divider node used to group related navigation items within a folder or at the top level of the tree. Separators are non-interactive and may optionally display a label.",
+      "required": ["type"],
+      "properties": {
+        "$id": {
+          "type": "string",
+          "description": "Optional unique identifier for this separator node."
+        },
+        "type": {
+          "type": "string",
+          "const": "separator",
+          "description": "Discriminator field identifying this node as a separator."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional label text displayed with the separator to title a group of navigation items."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Optional icon displayed with the separator label."
+        }
+      }
+    }
+  }
+}

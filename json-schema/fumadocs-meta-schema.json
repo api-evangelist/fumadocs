@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fumadocs.dev/schemas/meta.json",
+  "title": "Fumadocs Meta",
+  "description": "The schema for a Fumadocs meta.json file placed in a documentation directory. Meta files configure the folder's display title, the ordered list of pages shown in the sidebar, default open and collapsible state, and whether the folder acts as a navigation root. When a meta.json is absent, Fumadocs generates default navigation from the file system order.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The display name for this documentation folder as shown in the sidebar navigation. Overrides the directory name.",
+      "example": "API Reference"
+    },
+    "pages": {
+      "type": "array",
+      "description": "An ordered list of page slugs or folder names controlling the sequence in which items appear in the sidebar. Items not listed appear after listed items in filesystem order. Use '...' as a placeholder to insert remaining unlisted pages at that position.",
+      "items": {
+        "type": "string",
+        "description": "Page slug (filename without extension), subdirectory name, or '...' placeholder."
+      },
+      "example": ["index", "getting-started", "...", "advanced"]
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of this documentation section displayed as supplementary text in navigation."
+    },
+    "root": {
+      "type": "boolean",
+      "description": "When true, this folder acts as a secondary navigation root. Activating any page within this folder causes the sidebar to display only this folder's contents, hiding the broader navigation tree."
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "When true, this folder section is expanded by default in the sidebar regardless of whether a child page is currently active."
+    },
+    "collapsible": {
+      "type": "boolean",
+      "description": "Controls whether users can collapse this folder section in the sidebar. Defaults to true. Set to false to keep the folder always expanded."
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon identifier or inline SVG content displayed alongside the folder title in sidebar navigation."
+    }
+  }
+}
