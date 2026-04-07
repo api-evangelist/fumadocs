@@ -38,7 +38,7 @@ paths:
   /api/search:
     get:
       operationId: searchDocs
-      summary: Search documentation content
+      summary: Fumadocs Search documentation content
       description: >-
         Searches indexed documentation content and returns a ranked list of
         matching pages, headings, and text segments. Accepts a query string and
@@ -73,7 +73,7 @@ paths:
   /api/search/static:
     get:
       operationId: exportSearchIndex
-      summary: Export the search index for static/client-side search
+      summary: Fumadocs Export the search index for static/client-side search
       description: >-
         Exports the full search index database so that client-side search
         implementations can download and query it locally without making

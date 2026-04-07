@@ -40,7 +40,7 @@ paths:
   /api/proxy:
     get:
       operationId: proxyGet
-      summary: Proxy a GET request to an external API
+      summary: Fumadocs Proxy a GET request to an external API
       description: >-
         Forwards a GET request to the external API server specified by the url
         query parameter. Returns the upstream server's response including status
@@ -81,7 +81,7 @@ paths:
                 $ref: '#/components/schemas/ProxyError'
     post:
       operationId: proxyPost
-      summary: Proxy a POST request to an external API
+      summary: Fumadocs Proxy a POST request to an external API
       description: >-
         Forwards a POST request with body to the external API server specified
         by the url query parameter. Used by the Fumadocs OpenAPI playground
@@ -124,7 +124,7 @@ paths:
                 $ref: '#/components/schemas/ProxyError'
     put:
       operationId: proxyPut
-      summary: Proxy a PUT request to an external API
+      summary: Fumadocs Proxy a PUT request to an external API
       description: >-
         Forwards a PUT request with body to the external API server specified
         by the url query parameter. Used by the Fumadocs OpenAPI playground
@@ -167,7 +167,7 @@ paths:
                 $ref: '#/components/schemas/ProxyError'
     patch:
       operationId: proxyPatch
-      summary: Proxy a PATCH request to an external API
+      summary: Fumadocs Proxy a PATCH request to an external API
       description: >-
         Forwards a PATCH request with body to the external API server specified
         by the url query parameter. Used by the Fumadocs OpenAPI playground
@@ -210,7 +210,7 @@ paths:
                 $ref: '#/components/schemas/ProxyError'
     delete:
       operationId: proxyDelete
-      summary: Proxy a DELETE request to an external API
+      summary: Fumadocs Proxy a DELETE request to an external API
       description: >-
         Forwards a DELETE request to the external API server specified by
         the url query parameter. Used by the Fumadocs OpenAPI playground
@@ -246,7 +246,7 @@ paths:
                 $ref: '#/components/schemas/ProxyError'
     head:
       operationId: proxyHead
-      summary: Proxy a HEAD request to an external API
+      summary: Fumadocs Proxy a HEAD request to an external API
       description: >-
         Forwards a HEAD request to the external API server specified by the url
         query parameter. Used to check resource availability and headers without
