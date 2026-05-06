@@ -1,0 +1,175 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fumadocs OpenAPI Proxy API
+  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables
+    the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS
+    restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request
+    to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets
+    may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/prox
+  tags:
+  - Fumadocs
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: fumadocs
+    baseUri: http://localhost:3000
+    description: Fumadocs OpenAPI Proxy API HTTP API.
+    resources:
+    - name: api-proxy
+      path: /api/proxy
+      operations:
+      - name: proxyget
+        method: GET
+        description: Fumadocs Proxy a GET request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: proxypost
+        method: POST
+        description: Fumadocs Proxy a POST request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: proxyput
+        method: PUT
+        description: Fumadocs Proxy a PUT request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: proxypatch
+        method: PATCH
+        description: Fumadocs Proxy a PATCH request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: proxydelete
+        method: DELETE
+        description: Fumadocs Proxy a DELETE request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: fumadocs-rest
+    description: REST adapter for Fumadocs OpenAPI Proxy API.
+    resources:
+    - path: /api/proxy
+      name: proxyget
+      operations:
+      - method: GET
+        name: proxyget
+        description: Fumadocs Proxy a GET request to an external API
+        call: fumadocs.proxyget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/proxy
+      name: proxypost
+      operations:
+      - method: POST
+        name: proxypost
+        description: Fumadocs Proxy a POST request to an external API
+        call: fumadocs.proxypost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/proxy
+      name: proxyput
+      operations:
+      - method: PUT
+        name: proxyput
+        description: Fumadocs Proxy a PUT request to an external API
+        call: fumadocs.proxyput
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/proxy
+      name: proxypatch
+      operations:
+      - method: PATCH
+        name: proxypatch
+        description: Fumadocs Proxy a PATCH request to an external API
+        call: fumadocs.proxypatch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/proxy
+      name: proxydelete
+      operations:
+      - method: DELETE
+        name: proxydelete
+        description: Fumadocs Proxy a DELETE request to an external API
+        call: fumadocs.proxydelete
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: fumadocs-mcp
+    transport: http
+    description: MCP adapter for Fumadocs OpenAPI Proxy API for AI agent use.
+    tools:
+    - name: proxyget
+      description: Fumadocs Proxy a GET request to an external API
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fumadocs.proxyget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: proxypost
+      description: Fumadocs Proxy a POST request to an external API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fumadocs.proxypost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: proxyput
+      description: Fumadocs Proxy a PUT request to an external API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: fumadocs.proxyput
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: proxypatch
+      description: Fumadocs Proxy a PATCH request to an external API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fumadocs.proxypatch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: proxydelete
+      description: Fumadocs Proxy a DELETE request to an external API
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fumadocs.proxydelete
+      outputParameters:
+      - type: object
+        mapping: $.
