@@ -1,22 +1,23 @@
 naftiko: 1.0.0-alpha2
 info:
-  label: Fumadocs OpenAPI Proxy API
-  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables
-    the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS
-    restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request
-    to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets
-    may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/prox
+  label: Fumadocs OpenAPI Proxy API — Proxy
+  description: 'Fumadocs OpenAPI Proxy API — Proxy. 6 operations. Lead operation: Fumadocs Proxy a GET request to an external
+    API. Self-contained Naftiko capability covering one Fumadocs business surface.'
   tags:
   - Fumadocs
-  - API
-  created: '2026-05-06'
-  modified: '2026-05-06'
+  - Proxy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FUMADOCS_API_KEY: FUMADOCS_API_KEY
 capability:
   consumes:
   - type: http
-    namespace: fumadocs
-    baseUri: http://localhost:3000
-    description: Fumadocs OpenAPI Proxy API HTTP API.
+    namespace: openapi-proxy-proxy
+    baseUri: ''
+    description: Fumadocs OpenAPI Proxy API — Proxy business capability. Self-contained, no shared references.
     resources:
     - name: api-proxy
       path: /api/proxy
@@ -37,6 +38,12 @@ capability:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
       - name: proxyput
         method: PUT
         description: Fumadocs Proxy a PUT request to an external API
@@ -45,6 +52,12 @@ capability:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
       - name: proxypatch
         method: PATCH
         description: Fumadocs Proxy a PATCH request to an external API
@@ -53,6 +66,12 @@ capability:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
       - name: proxydelete
         method: DELETE
         description: Fumadocs Proxy a DELETE request to an external API
@@ -61,115 +80,143 @@ capability:
         - name: result
           type: object
           value: $.
+      - name: proxyhead
+        method: HEAD
+        description: Fumadocs Proxy a HEAD request to an external API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
   - type: rest
+    namespace: openapi-proxy-proxy-rest
     port: 8080
-    namespace: fumadocs-rest
-    description: REST adapter for Fumadocs OpenAPI Proxy API.
+    description: REST adapter for Fumadocs OpenAPI Proxy API — Proxy. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
     resources:
-    - path: /api/proxy
-      name: proxyget
+    - path: /v1/api/proxy
+      name: api-proxy
+      description: REST surface for api-proxy.
       operations:
       - method: GET
         name: proxyget
         description: Fumadocs Proxy a GET request to an external API
-        call: fumadocs.proxyget
+        call: openapi-proxy-proxy.proxyget
         outputParameters:
         - type: object
           mapping: $.
-    - path: /api/proxy
-      name: proxypost
-      operations:
       - method: POST
         name: proxypost
         description: Fumadocs Proxy a POST request to an external API
-        call: fumadocs.proxypost
+        call: openapi-proxy-proxy.proxypost
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /api/proxy
-      name: proxyput
-      operations:
       - method: PUT
         name: proxyput
         description: Fumadocs Proxy a PUT request to an external API
-        call: fumadocs.proxyput
+        call: openapi-proxy-proxy.proxyput
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /api/proxy
-      name: proxypatch
-      operations:
       - method: PATCH
         name: proxypatch
         description: Fumadocs Proxy a PATCH request to an external API
-        call: fumadocs.proxypatch
+        call: openapi-proxy-proxy.proxypatch
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /api/proxy
-      name: proxydelete
-      operations:
       - method: DELETE
         name: proxydelete
         description: Fumadocs Proxy a DELETE request to an external API
-        call: fumadocs.proxydelete
+        call: openapi-proxy-proxy.proxydelete
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: proxyhead
+        description: Fumadocs Proxy a HEAD request to an external API
+        call: openapi-proxy-proxy.proxyhead
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
+    namespace: openapi-proxy-proxy-mcp
     port: 9090
-    namespace: fumadocs-mcp
     transport: http
-    description: MCP adapter for Fumadocs OpenAPI Proxy API for AI agent use.
+    description: MCP adapter for Fumadocs OpenAPI Proxy API — Proxy. One tool per consumed operation, routed inline through
+      this capability's consumes block.
     tools:
-    - name: proxyget
+    - name: fumadocs-proxy-get-request-external
       description: Fumadocs Proxy a GET request to an external API
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: fumadocs.proxyget
+      call: openapi-proxy-proxy.proxyget
       outputParameters:
       - type: object
         mapping: $.
-    - name: proxypost
+    - name: fumadocs-proxy-post-request-external
       description: Fumadocs Proxy a POST request to an external API
       hints:
         readOnly: false
         destructive: false
         idempotent: false
-      call: fumadocs.proxypost
+      call: openapi-proxy-proxy.proxypost
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: proxyput
+    - name: fumadocs-proxy-put-request-external
       description: Fumadocs Proxy a PUT request to an external API
       hints:
         readOnly: false
         destructive: false
         idempotent: true
-      call: fumadocs.proxyput
+      call: openapi-proxy-proxy.proxyput
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: proxypatch
+    - name: fumadocs-proxy-patch-request-external
       description: Fumadocs Proxy a PATCH request to an external API
       hints:
         readOnly: false
         destructive: false
-        idempotent: false
-      call: fumadocs.proxypatch
+        idempotent: true
+      call: openapi-proxy-proxy.proxypatch
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: proxydelete
+    - name: fumadocs-proxy-delete-request-external
       description: Fumadocs Proxy a DELETE request to an external API
       hints:
         readOnly: false
         destructive: true
         idempotent: true
-      call: fumadocs.proxydelete
+      call: openapi-proxy-proxy.proxydelete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fumadocs-proxy-head-request-external
+      description: Fumadocs Proxy a HEAD request to an external API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: openapi-proxy-proxy.proxyhead
       outputParameters:
       - type: object
         mapping: $.
