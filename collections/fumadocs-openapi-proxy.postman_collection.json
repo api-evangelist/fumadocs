@@ -1,0 +1,1622 @@
+{
+  "item": [
+    {
+      "id": "05e92171-f85b-4c10-bfd0-ea7e88f477f7",
+      "name": "Proxy",
+      "description": {
+        "content": "HTTP proxy endpoints that forward requests to external API servers on behalf of the browser-based OpenAPI playground to avoid CORS issues.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "374c4a7d-011c-47c4-9a44-7dc77853e358",
+          "name": "Fumadocs Proxy a GET request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a GET request to an external API",
+            "description": {
+              "content": "Forwards a GET request to the external API server specified by the url query parameter. Returns the upstream server's response including status code, headers, and body. Used by the Fumadocs OpenAPI playground to perform try-it-now requests from the browser. The target URL must be allowed by the proxy's configured allowedOrigins or filterRequest rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9c9101a-b0fe-4ca3-88b3-187b4dc144c5",
+              "name": "Response from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f0062e4-614a-4f9d-b3f1-4b43ad61e0c8",
+              "name": "Bad request. The url parameter is missing or the target origin is not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4305ea3a-8307-40ee-b8c8-b46d11f4811b",
+              "name": "The proxied request is not allowed by the configured filter rules.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adea9106-8ee4-4beb-9324-c5e90f2b67e6",
+              "name": "The proxy failed to connect to or receive a response from the upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22817fcb-8788-42af-b495-5feae2e4aacd",
+          "name": "Fumadocs Proxy a POST request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a POST request to an external API",
+            "description": {
+              "content": "Forwards a POST request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now operations that create or submit data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 8745.154725920476\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "016d7599-eaf9-4722-945e-7a816ae067e8",
+              "name": "Response from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1ecc3c0-7443-4e18-b564-d2e5aad2927e",
+              "name": "Bad request. The url parameter is missing or the target origin is not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ee4a701-0e71-42e7-97e5-0937dba3191f",
+              "name": "The proxied request is not allowed by the configured filter rules.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2a28b6b-6c2c-4c18-bea6-fd24743b4ff1",
+              "name": "The proxy failed to connect to the upstream server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce9c3cc5-d04c-4a0c-925f-4951a3ac185f",
+          "name": "Fumadocs Proxy a PUT request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a PUT request to an external API",
+            "description": {
+              "content": "Forwards a PUT request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now update operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 8745.154725920476\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37b088fe-323a-4aa7-b531-dc60c059daf1",
+              "name": "Response from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f3e2dca-bbee-42e0-b3cb-fc67026f21e1",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "809e2ebc-b2eb-4798-9e45-5dff3d71f63d",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78603a7c-9db7-43ae-a2a0-245df8a839e9",
+              "name": "Upstream connection failure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d364d712-bc0a-43c4-8ee7-4aeaa583d0a0",
+          "name": "Fumadocs Proxy a PATCH request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a PATCH request to an external API",
+            "description": {
+              "content": "Forwards a PATCH request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now partial update operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": 8745.154725920476\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bda9ac1a-8b4b-4f4b-b562-e5a3647d5dfb",
+              "name": "Response from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bafc1995-6461-4e01-9fd4-6b813e103a61",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "177ab5ae-f25d-418f-a084-d13ee4b488a2",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27444d71-7566-47c1-861a-693ecab71a5c",
+              "name": "Upstream connection failure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "200561db-86ea-4c18-8679-f8d2342f4380",
+          "name": "Fumadocs Proxy a DELETE request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a DELETE request to an external API",
+            "description": {
+              "content": "Forwards a DELETE request to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now delete operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f2cb168-8c93-40fd-97b2-43a1688aad98",
+              "name": "Response from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 3928.289577295772,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c17ea106-60f1-4d9e-bed9-afcd71078227",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bf0dc59-e374-4211-b5e0-b182e22bc50b",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b1c1410-40e5-4702-8ac9-f889942ba2c5",
+              "name": "Upstream connection failure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb573745-283c-4d0c-a5d6-fbd954c6218b",
+          "name": "Fumadocs Proxy a HEAD request to an external API",
+          "request": {
+            "name": "Fumadocs Proxy a HEAD request to an external API",
+            "description": {
+              "content": "Forwards a HEAD request to the external API server specified by the url query parameter. Used to check resource availability and headers without fetching the full response body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e956d71-d42b-464c-9352-8fcb29060067",
+              "name": "Response headers from the upstream API server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25b4bdf3-44ed-462d-951d-e735baebd4c0",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8a83fe5-7776-44cc-b74d-be7fab230339",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79cf0b46-945b-4c0d-a2a5-ee77a5e96b3d",
+              "name": "Upstream connection failure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://api.example.com/v1/users"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"[Proxy] The origin \\\"https://api.example.com\\\" is not allowed.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "{{baseUrl}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e0d233c1-3e9b-4451-80ea-0930ff38d15d",
+    "name": "Fumadocs OpenAPI Proxy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/proxy to support try-it-now functionality within the rendered API reference.\n\nContact Support:\n Name: Fumadocs",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fumadocs OpenAPI Proxy API",
+    "version": "10.3.18"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fumadocs Proxy a GET request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ]
+          },
+          "docs": "Forwards a GET request to the external API server specified by the url query parameter. Returns the upstream server's response including status code, headers, and body. Used by the Fumadocs OpenAPI playground to perform try-it-now requests from the browser. The target URL must be allowed by the proxy's configured allowedOrigins or filterRequest rules."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Proxy a POST request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwards a POST request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now operations that create or submit data."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Proxy a PUT request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwards a PUT request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now update operations."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Proxy a PATCH request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwards a PATCH request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now partial update operations."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Proxy a DELETE request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ]
+          },
+          "docs": "Forwards a DELETE request to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now delete operations."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Proxy a HEAD request to an external API",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{baseUrl}/api/proxy",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set."
+              }
+            ]
+          },
+          "docs": "Forwards a HEAD request to the external API server specified by the url query parameter. Used to check resource availability and headers without fetching the full response body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

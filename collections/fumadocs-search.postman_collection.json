@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "512b89f0-03a1-448c-a04b-668b413551f8",
+      "name": "Search",
+      "description": {
+        "content": "Search endpoints for querying documentation content. Results include pages, headings, and text segments ranked by relevance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96cf5dab-c2c0-4246-86e6-06a70bbbba25",
+          "name": "Fumadocs Search documentation content",
+          "request": {
+            "name": "Fumadocs Search documentation content",
+            "description": {
+              "content": "Searches indexed documentation content and returns a ranked list of matching pages, headings, and text segments. Accepts a query string and optional filters for locale and tag. Returns an empty array when no query is provided. Each result includes the page URL, content type, breadcrumbs, and highlighted content. The default endpoint path is /api/search but can be customized per site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "The search query string. When absent or empty, an empty results array is returned immediately without querying the index."
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "BCP 47 locale code to filter results to a specific language version of the documentation site. Useful for internationalized sites."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "One or more comma-separated tag values to restrict search results to specific sections or categories within the documentation. Multiple tags are separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return. When omitted, the search engine's default limit is used."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c7fe0ab-90ee-4ebf-83cc-4348915d6e82",
+              "name": "A list of search results ranked by relevance. Returns an empty array when the query parameter is absent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "getting started installation"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "api,reference"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"docs/getting-started#installation\",\n    \"url\": \"/docs/getting-started#installation\",\n    \"type\": \"heading\",\n    \"content\": \"Getting **started** with Fumadocs **installation**\",\n    \"breadcrumbs\": [\n      \"Docs\",\n      \"Getting Started\"\n    ]\n  },\n  {\n    \"id\": \"docs/getting-started#installation\",\n    \"url\": \"/docs/getting-started#installation\",\n    \"type\": \"heading\",\n    \"content\": \"Getting **started** with Fumadocs **installation**\",\n    \"breadcrumbs\": [\n      \"Docs\",\n      \"Getting Started\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b19b8d32-d3ea-466d-9dae-5d689c487b15",
+              "name": "Server error during search execution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "getting started installation"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "api,reference"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error during search.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0be75fce-0fc7-4538-b1d4-28fc1f6c2a3e",
+          "name": "Fumadocs Export the search index for static/client-side search",
+          "request": {
+            "name": "Fumadocs Export the search index for static/client-side search",
+            "description": {
+              "content": "Exports the full search index database so that client-side search implementations can download and query it locally without making per-query requests. The response format depends on the underlying search engine (Orama, Flexsearch, etc.) configured by the site. This endpoint path is a convention; actual path may vary per documentation site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "search",
+                "static"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6c76e5e-9e9b-445c-8fb2-192b5143e45b",
+              "name": "The serialized search index. The structure depends on the configured search engine.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search",
+                    "static"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 576,\n  \"key_1\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b11a2e1-dd8c-4b69-b080-245ff32773d7",
+              "name": "Server error during index export.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "search",
+                    "static"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error during search.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Base URL of the documentation site. Fumadocs is a self-hosted framework; each site sets its own base URL.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "{{baseUrl}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e2b5df18-f47f-4dff-bfe9-44dfd1bdb070",
+    "name": "Fumadocs Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Fumadocs Search API provides a server-side HTTP endpoint for querying documentation content indexed by Fumadocs Core. Documentation sites built with Fumadocs expose a GET endpoint (typically at /api/search) that accepts a search query and returns ranked, highlighted results including pages, headings, and text segments. Results can be filtered by tag and locale to scope searches within multilingual or multi-section documentation sites. The endpoint also supports a static export mode that returns the full search index for client-side search implementations.\n\nContact Support:\n Name: Fumadocs",
+      "type": "text/plain"
+    }
+  }
+}

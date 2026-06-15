@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fumadocs Search API",
+    "version": "16.6.17"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fumadocs Search documentation content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/api/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string. When absent or empty, an empty results array is returned immediately without querying the index."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "BCP 47 locale code to filter results to a specific language version of the documentation site. Useful for internationalized sites."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "One or more comma-separated tag values to restrict search results to specific sections or categories within the documentation. Multiple tags are separated by commas."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return. When omitted, the search engine's default limit is used."
+              }
+            ]
+          },
+          "docs": "Searches indexed documentation content and returns a ranked list of matching pages, headings, and text segments. Accepts a query string and optional filters for locale and tag. Returns an empty array when no query is provided. Each result includes the page URL, content type, breadcrumbs, and highlighted content. The default endpoint path is /api/search but can be customized per site."
+        },
+        {
+          "info": {
+            "name": "Fumadocs Export the search index for static/client-side search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/api/search/static"
+          },
+          "docs": "Exports the full search index database so that client-side search implementations can download and query it locally without making per-query requests. The response format depends on the underlying search engine (Orama, Flexsearch, etc.) configured by the site. This endpoint path is a convention; actual path may vary per documentation site."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
