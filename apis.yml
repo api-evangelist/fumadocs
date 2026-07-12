@@ -78,6 +78,8 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/fumadocs-domain-security.yml
   - url: https://fumadocs.dev
     name: Fumadocs
     type: Website
@@ -134,3 +136,5 @@ common:
     name: Fumadocs JSON-LD Context
     type: JSONLD
     description: JSON-LD context mapping Fumadocs entities to schema.org and standard vocabularies.
+  - url: https://fumadocs.dev/blog/rss.xml
+    type: Blog
