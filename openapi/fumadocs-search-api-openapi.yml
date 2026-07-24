@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: Fumadocs OpenAPI Proxy Search API
+  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/proxy to support try-it-now functionality within the rendered API reference.
+  version: 10.3.18
+  contact:
+    name: Fumadocs
+    url: https://fumadocs.dev
+  license:
+    name: MIT
+    url: https://github.com/fuma-nama/fumadocs/blob/main/LICENSE
+servers:
+- url: '{baseUrl}'
+  description: Fumadocs documentation site
+  variables:
+    baseUrl:
+      default: http://localhost:3000
+      description: Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.
+tags:
+- name: Search
+  description: Search endpoints for querying documentation content. Results include pages, headings, and text segments ranked by relevance.
+paths:
+  /api/search:
+    get:
+      operationId: searchDocs
+      summary: Fumadocs Search documentation content
+      description: Searches indexed documentation content and returns a ranked list of matching pages, headings, and text segments. Accepts a query string and optional filters for locale and tag. Returns an empty array when no query is provided. Each result includes the page URL, content type, breadcrumbs, and highlighted content. The default endpoint path is /api/search but can be customized per site.
+      tags:
+      - Search
+      parameters:
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/locale'
+      - $ref: '#/components/parameters/tag'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A list of search results ranked by relevance. Returns an empty array when the query parameter is absent.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SortedResult'
+        '500':
+          description: Server error during search execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/search/static:
+    get:
+      operationId: exportSearchIndex
+      summary: Fumadocs Export the search index for static/client-side search
+      description: Exports the full search index database so that client-side search implementations can download and query it locally without making per-query requests. The response format depends on the underlying search engine (Orama, Flexsearch, etc.) configured by the site. This endpoint path is a convention; actual path may vary per documentation site.
+      tags:
+      - Search
+      responses:
+        '200':
+          description: The serialized search index. The structure depends on the configured search engine.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Serialized search index. Schema is engine-dependent (Orama database export, Flexsearch export, etc.).
+                additionalProperties: true
+        '500':
+          description: Server error during index export.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  parameters:
+    query:
+      name: query
+      in: query
+      required: false
+      description: The search query string. When absent or empty, an empty results array is returned immediately without querying the index.
+      schema:
+        type: string
+        example: getting started installation
+    locale:
+      name: locale
+      in: query
+      required: false
+      description: BCP 47 locale code to filter results to a specific language version of the documentation site. Useful for internationalized sites.
+      schema:
+        type: string
+        example: en
+    tag:
+      name: tag
+      in: query
+      required: false
+      description: One or more comma-separated tag values to restrict search results to specific sections or categories within the documentation. Multiple tags are separated by commas.
+      schema:
+        type: string
+        example: api,reference
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results to return. When omitted, the search engine's default limit is used.
+      schema:
+        type: integer
+        minimum: 1
+        example: 10
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned when a server-side failure occurs.
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Internal server error during search.
+    SortedResult:
+      type: object
+      description: A single search result representing a matched page, heading, or text segment within the documentation. Results are pre-sorted by relevance score.
+      required:
+      - id
+      - url
+      - type
+      - content
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the result within the search index. Used for deduplication and client-side state management.
+          example: docs/getting-started#installation
+        url:
+          type: string
+          description: Relative or absolute URL of the documentation page containing this result. May include a fragment identifier pointing to a specific heading.
+          example: /docs/getting-started#installation
+        type:
+          type: string
+          description: The granularity level of this search result. 'page' indicates the result refers to an entire page title match; 'heading' indicates a section heading match; 'text' indicates a body text segment match.
+          enum:
+          - page
+          - heading
+          - text
+        content:
+          type: string
+          description: The matched text content for this result. May contain Markdown highlight markers (using <mark> elements) indicating the matched terms within the content.
+          example: Getting **started** with Fumadocs **installation**
+        breadcrumbs:
+          type: array
+          description: Ordered list of ancestor page or section titles forming the navigation breadcrumb trail to this result. Displayed in the search UI to help users understand where the result is located.
+          items:
+            type: string
+          example:
+          - Docs
+          - Getting Started
+externalDocs:
+  description: Fumadocs OpenAPI Documentation
+  url: https://fumadocs.dev/docs/ui/openapi

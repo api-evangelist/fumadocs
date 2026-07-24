@@ -1,56 +1,34 @@
 openapi: 3.1.0
 info:
   title: Fumadocs OpenAPI Proxy API
-  description: >-
-    The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the
-    fumadocs-openapi package that enables the interactive API playground to make
-    requests to external OpenAPI servers from the browser without encountering
-    CORS restrictions. The proxy accepts any HTTP method, extracts a target URL
-    from the url query parameter, forwards the request to the target server, and
-    returns the response. Allowed origins or URL prefixes can be configured to
-    restrict which targets may be proxied. Documentation sites using the
-    Fumadocs OpenAPI playground integrate this proxy at a route such as
-    /api/proxy to support try-it-now functionality within the rendered API
-    reference.
-  version: '10.3.18'
+  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/proxy to support try-it-now functionality within the rendered API reference.
+  version: 10.3.18
   contact:
     name: Fumadocs
     url: https://fumadocs.dev
   license:
     name: MIT
     url: https://github.com/fuma-nama/fumadocs/blob/main/LICENSE
-externalDocs:
-  description: Fumadocs OpenAPI Documentation
-  url: https://fumadocs.dev/docs/ui/openapi
 servers:
-  - url: '{baseUrl}'
-    description: Fumadocs documentation site
-    variables:
-      baseUrl:
-        default: http://localhost:3000
-        description: >-
-          Base URL of the documentation site. Each site configures its own
-          proxy endpoint path, typically /api/proxy.
+- url: '{baseUrl}'
+  description: Fumadocs documentation site
+  variables:
+    baseUrl:
+      default: http://localhost:3000
+      description: Base URL of the documentation site. Each site configures its own proxy endpoint path, typically /api/proxy.
 tags:
-  - name: Proxy
-    description: >-
-      HTTP proxy endpoints that forward requests to external API servers on
-      behalf of the browser-based OpenAPI playground to avoid CORS issues.
+- name: Proxy
+  description: HTTP proxy endpoints that forward requests to external API servers on behalf of the browser-based OpenAPI playground to avoid CORS issues.
 paths:
   /api/proxy:
     get:
       operationId: proxyGet
       summary: Fumadocs Proxy a GET request to an external API
-      description: >-
-        Forwards a GET request to the external API server specified by the url
-        query parameter. Returns the upstream server's response including status
-        code, headers, and body. Used by the Fumadocs OpenAPI playground to
-        perform try-it-now requests from the browser. The target URL must be
-        allowed by the proxy's configured allowedOrigins or filterRequest rules.
+      description: Forwards a GET request to the external API server specified by the url query parameter. Returns the upstream server's response including status code, headers, and body. Used by the Fumadocs OpenAPI playground to perform try-it-now requests from the browser. The target URL must be allowed by the proxy's configured allowedOrigins or filterRequest rules.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       responses:
         '200':
           description: Response from the upstream API server.
@@ -60,9 +38,7 @@ paths:
                 description: Upstream API response body.
                 additionalProperties: true
         '400':
-          description: >-
-            Bad request. The url parameter is missing or the target origin is
-            not allowed.
+          description: Bad request. The url parameter is missing or the target origin is not allowed.
           content:
             application/json:
               schema:
@@ -82,14 +58,11 @@ paths:
     post:
       operationId: proxyPost
       summary: Fumadocs Proxy a POST request to an external API
-      description: >-
-        Forwards a POST request with body to the external API server specified
-        by the url query parameter. Used by the Fumadocs OpenAPI playground
-        for try-it-now operations that create or submit data.
+      description: Forwards a POST request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now operations that create or submit data.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       requestBody:
         description: Request body to forward to the upstream API server.
         required: false
@@ -125,14 +98,11 @@ paths:
     put:
       operationId: proxyPut
       summary: Fumadocs Proxy a PUT request to an external API
-      description: >-
-        Forwards a PUT request with body to the external API server specified
-        by the url query parameter. Used by the Fumadocs OpenAPI playground
-        for try-it-now update operations.
+      description: Forwards a PUT request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now update operations.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       requestBody:
         description: Request body to forward to the upstream API server.
         required: false
@@ -168,14 +138,11 @@ paths:
     patch:
       operationId: proxyPatch
       summary: Fumadocs Proxy a PATCH request to an external API
-      description: >-
-        Forwards a PATCH request with body to the external API server specified
-        by the url query parameter. Used by the Fumadocs OpenAPI playground
-        for try-it-now partial update operations.
+      description: Forwards a PATCH request with body to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now partial update operations.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       requestBody:
         description: Request body to forward to the upstream API server.
         required: false
@@ -211,14 +178,11 @@ paths:
     delete:
       operationId: proxyDelete
       summary: Fumadocs Proxy a DELETE request to an external API
-      description: >-
-        Forwards a DELETE request to the external API server specified by
-        the url query parameter. Used by the Fumadocs OpenAPI playground
-        for try-it-now delete operations.
+      description: Forwards a DELETE request to the external API server specified by the url query parameter. Used by the Fumadocs OpenAPI playground for try-it-now delete operations.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       responses:
         '200':
           description: Response from the upstream API server.
@@ -247,14 +211,11 @@ paths:
     head:
       operationId: proxyHead
       summary: Fumadocs Proxy a HEAD request to an external API
-      description: >-
-        Forwards a HEAD request to the external API server specified by the url
-        query parameter. Used to check resource availability and headers without
-        fetching the full response body.
+      description: Forwards a HEAD request to the external API server specified by the url query parameter. Used to check resource availability and headers without fetching the full response body.
       tags:
-        - Proxy
+      - Proxy
       parameters:
-        - $ref: '#/components/parameters/proxyUrl'
+      - $ref: '#/components/parameters/proxyUrl'
       responses:
         '200':
           description: Response headers from the upstream API server.
@@ -282,24 +243,22 @@ components:
       name: url
       in: query
       required: true
-      description: >-
-        The fully qualified URL of the upstream API endpoint to proxy the
-        request to. Must be a valid absolute URL. The target origin must be
-        permitted by the proxy's allowedOrigins configuration, if set.
+      description: The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set.
       schema:
         type: string
         format: uri
-        example: 'https://api.example.com/v1/users'
+        example: https://api.example.com/v1/users
   schemas:
     ProxyError:
       type: object
-      description: >-
-        Error message returned by the Fumadocs proxy when a request cannot be
-        forwarded or the upstream server cannot be reached.
+      description: Error message returned by the Fumadocs proxy when a request cannot be forwarded or the upstream server cannot be reached.
       required:
-        - message
+      - message
       properties:
         message:
           type: string
           description: Human-readable description of the proxy error.
           example: '[Proxy] The origin "https://api.example.com" is not allowed.'
+externalDocs:
+  description: Fumadocs OpenAPI Documentation
+  url: https://fumadocs.dev/docs/ui/openapi
