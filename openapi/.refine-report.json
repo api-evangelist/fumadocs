@@ -1,0 +1,16 @@
+{
+  "provider": "fumadocs",
+  "sources": [
+    "fumadocs-proxy-api-openapi.yml",
+    "fumadocs-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "fumadocs-proxy-api-openapi.yml",
+    "fumadocs-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
