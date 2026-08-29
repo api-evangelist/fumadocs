@@ -60,6 +60,19 @@ tags:
   - Next.js
   - React
 type: Index
+deliveryModel:
+  model: unknown
+  license: Fumadocs License (MIT)
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
