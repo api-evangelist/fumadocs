@@ -1,8 +1,8 @@
 {
   "provider": "fumadocs",
   "sources": [
-    "fumadocs-proxy-api-openapi.yml",
-    "fumadocs-search-api-openapi.yml"
+    "_original/fumadocs-openapi-proxy-openapi.yml",
+    "_original/fumadocs-search-openapi.yml"
   ],
   "outputs": [
     "fumadocs-proxy-api-openapi.yml",
@@ -11,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fumadocs-openapi-proxy-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "fumadocs-search-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "fumadocs-proxy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fumadocs-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

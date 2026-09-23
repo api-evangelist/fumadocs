@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Fumadocs OpenAPI Proxy API
-  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS restrictions. The proxy accepts any HTTP method, extracts a target URL from the url query parameter, forwards the request to the target server, and returns the response. Allowed origins or URL prefixes can be configured to restrict which targets may be proxied. Documentation sites using the Fumadocs OpenAPI playground integrate this proxy at a route such as /api/proxy to support try-it-now functionality within the rendered API reference.
+  description: The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy built into the fumadocs-openapi package that enables the interactive API playground to make requests to external OpenAPI servers from the browser without encountering CORS restrictions.
   version: 10.3.18
   contact:
     name: Fumadocs
@@ -238,16 +238,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProxyError'
 components:
-  parameters:
-    proxyUrl:
-      name: url
-      in: query
-      required: true
-      description: The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set.
-      schema:
-        type: string
-        format: uri
-        example: https://api.example.com/v1/users
   schemas:
     ProxyError:
       type: object
@@ -259,6 +249,16 @@ components:
           type: string
           description: Human-readable description of the proxy error.
           example: '[Proxy] The origin "https://api.example.com" is not allowed.'
+  parameters:
+    proxyUrl:
+      name: url
+      in: query
+      required: true
+      description: The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set.
+      schema:
+        type: string
+        format: uri
+        example: https://api.example.com/v1/users
 externalDocs:
   description: Fumadocs OpenAPI Documentation
   url: https://fumadocs.dev/docs/ui/openapi
