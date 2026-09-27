@@ -105,6 +105,16 @@ components:
         minimum: 1
         example: 10
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned when a server-side failure occurs.
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Internal server error during search.
     SortedResult:
       type: object
       description: A single search result representing a matched page, heading, or text segment within the documentation. Results are pre-sorted by relevance score.
@@ -141,16 +151,6 @@ components:
           example:
           - Docs
           - Getting Started
-    ErrorResponse:
-      type: object
-      description: Error response returned when a server-side failure occurs.
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Internal server error during search.
 externalDocs:
   description: Fumadocs Search Documentation
   url: https://fumadocs.dev/docs/headless/search/orama

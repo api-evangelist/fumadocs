@@ -238,6 +238,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProxyError'
 components:
+  parameters:
+    proxyUrl:
+      name: url
+      in: query
+      required: true
+      description: The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set.
+      schema:
+        type: string
+        format: uri
+        example: https://api.example.com/v1/users
   schemas:
     ProxyError:
       type: object
@@ -249,16 +259,6 @@ components:
           type: string
           description: Human-readable description of the proxy error.
           example: '[Proxy] The origin "https://api.example.com" is not allowed.'
-  parameters:
-    proxyUrl:
-      name: url
-      in: query
-      required: true
-      description: The fully qualified URL of the upstream API endpoint to proxy the request to. Must be a valid absolute URL. The target origin must be permitted by the proxy's allowedOrigins configuration, if set.
-      schema:
-        type: string
-        format: uri
-        example: https://api.example.com/v1/users
 externalDocs:
   description: Fumadocs OpenAPI Documentation
   url: https://fumadocs.dev/docs/ui/openapi
