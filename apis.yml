@@ -101,6 +101,12 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Plans
+    url: plans/fumadocs-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/fumadocs-rate-limits.yml
+  - type: FinOps
+    url: finops/fumadocs-finops.yml
   - type: AgenticAccess
     url: agentic-access/fumadocs-agentic-access.yml
   - type: DomainSecurity
