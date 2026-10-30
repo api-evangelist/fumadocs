@@ -1,4 +1,4 @@
-# Fumadocs (fumadocs)
+# Fumadocs
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,105 +66,139 @@
 
 Fumadocs is a modern documentation framework built on Next.js for building developer documentation sites. It provides a complete set of composable packages for content loading, navigation tree generation, full-text search, UI components, and interactive API reference generation from OpenAPI specifications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/fumadocs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/fumadocs/refs/heads/main/apis.yml)
+**Areas:** Documentation · Framework · Next.js · React
 
-## Scope
+## Fumadocs on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Fumadocs is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fumadocs/](https://apis.io/providers/fumadocs/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (3)
 
-- Documentation
-- Framework
-- Next.js
-- React
+- [Fumadocs](https://apis.io/apis/fumadocs/fumadocs/) — Fumadocs is an open-source documentation framework built on Next.js and React for creating fast, modern developer documentation sites. It provides a full…
+- [Fumadocs Proxy API](https://apis.io/apis/fumadocs/fumadocs-proxy-api/) — HTTP proxy endpoints that forward requests to external API servers on behalf of the browser-based OpenAPI playground to avoid CORS issues.
+- [Fumadocs Search API](https://apis.io/apis/fumadocs/fumadocs-search-api/) — Search endpoints for querying documentation content. Results include pages, headings, and text segments ranked by relevance.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-18
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Fumadocs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Fumadocs is an open-source documentation framework built on Next.js and React for creating fast, modern developer documentation sites. It provides a full stack of composable packages including fumadocs-core for source loading, page tree generation, and search; fumadocs-ui for pre-built accessible React components, themes, and layouts; fumadocs-openapi for generating interactive API reference pages from OpenAPI specifications with a built-in playground; and a CLI for scaffolding new projects.
+- [Fumadocs Agentic Access](https://apis.io/agentic-access/fumadocs/fumadocs-agentic-access/)
 
-- **Human URL:** [https://fumadocs.dev](https://fumadocs.dev)
+#### JSON Schema (4)
 
-#### Tags
+The data models the API reads and writes.
 
-- Documentation
-- Framework
-- Next.js
+- [Fumadocs Meta](https://apis.io/schemas/fumadocs/fumadocs-meta/)
+- [Fumadocs Page](https://apis.io/schemas/fumadocs/fumadocs-page/)
+- [Fumadocs Page Tree](https://apis.io/schemas/fumadocs/fumadocs-page-tree/)
+- [Fumadocs Search Result](https://apis.io/schemas/fumadocs/fumadocs-search-result/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://fumadocs.dev/docs)
-- [Git Hub](https://github.com/fuma-nama/fumadocs)
-- [Postman Collection](collections/fumadocs-openapi-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fumadocs-openapi-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/fumadocs-search.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fumadocs-search.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Linked-data contexts for the provider's vocabulary.
 
-### Fumadocs Search API
+- [Fumadocs Context](https://apis.io/jsonld/fumadocs/fumadocs-context/)
 
-The Fumadocs Search API is a server-side HTTP endpoint embedded in each Fumadocs documentation site that enables full-text search across all indexed documentation content. The endpoint (typically at /api/search) accepts a query string along with optional locale and tag filters, and returns a ranked list of matching pages, headings, and text segments with highlighted content and breadcrumb trails.
+#### Collections (4)
 
-- **Human URL:** [https://fumadocs.dev/docs/headless/search/orama](https://fumadocs.dev/docs/headless/search/orama)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Fumadocs OpenAPI Proxy API](https://apis.io/collections/fumadocs/open-fumadocs-openapi-proxy/)
+- [Fumadocs OpenAPI Proxy API](https://apis.io/collections/fumadocs/open-fumadocs-proxy-api/)
+- [Fumadocs Search API](https://apis.io/collections/fumadocs/open-fumadocs-search/)
+- [Fumadocs OpenAPI Proxy Search API](https://apis.io/collections/fumadocs/open-fumadocs-search-api/)
 
-- Documentation
-- Search
+#### Governance rules (1)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://fumadocs.dev/docs/headless/search/orama)
-- [OpenAPI](openapi/fumadocs-search-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fumadocs-search.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fumadocs-search.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/fumadocs-search-result-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Fumadocs — jsonschema rules](https://apis.io/rules/fumadocs/fumadocs-jsonschema-spectral-rules/)
 
-### Fumadocs OpenAPI Proxy API
+#### Security (1)
 
-The Fumadocs OpenAPI Proxy API is a server-side HTTP proxy included in the fumadocs-openapi package that enables the interactive API playground to make authenticated requests to external API servers from the browser without CORS restrictions. Documentation sites mount the proxy at a route such as /api/proxy, where it accepts any HTTP method, extracts the target URL from the url query parameter, and transparently forwards the request to the upstream server.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://fumadocs.dev/docs/ui/openapi](https://fumadocs.dev/docs/ui/openapi)
+- [Fumadocs Domain Security](https://apis.io/security/fumadocs/fumadocs-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Documentation
-- OpenAPI
-- Proxy
+Published plans, tiers and prices.
 
-#### Properties
+- [Fumadocs Plans Pricing](https://apis.io/plans/fumadocs/fumadocs-plans-pricing/)
 
-- [Documentation](https://fumadocs.dev/docs/ui/openapi)
-- [OpenAPI](openapi/fumadocs-openapi-proxy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fumadocs-openapi-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fumadocs-openapi-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-## Common Properties
+Published request limits.
+
+- [Fumadocs Rate Limits](https://apis.io/rate-limits/fumadocs/fumadocs-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Fumadocs Finops](https://apis.io/finops/fumadocs/fumadocs-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://fumadocs.dev)
 - [Documentation](https://fumadocs.dev/docs)
-- [Git Hub](https://github.com/fuma-nama/fumadocs)
-- [Documentation](https://fumadocs.dev/docs/ui/components)
-- [Documentation](https://fumadocs.dev/docs/headless/search/orama)
-- [Documentation](https://fumadocs.dev/docs/ui/openapi)
-- [Distribution](https://www.npmjs.com/package/fumadocs-core)
-- [Distribution](https://www.npmjs.com/package/fumadocs-ui)
-- [Distribution](https://www.npmjs.com/package/fumadocs-openapi)
-- [License](https://github.com/fuma-nama/fumadocs/blob/main/LICENSE)
-- [JSON Schema](json-schema/fumadocs-page-tree-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fumadocs-page-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/fumadocs-meta-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/fumadocs-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Blog](https://fumadocs.dev/blog/rss.xml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 22.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 53.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 5.3 |
+
+**Agent readiness 21.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fumadocs/](https://apis.io/providers/fumadocs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fumadocs: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fumadocs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
